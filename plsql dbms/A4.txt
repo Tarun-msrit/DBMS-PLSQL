@@ -20,7 +20,8 @@ insert into part values(30,'screw','green');
 
 declare  
       cursor curr is 
-      counter int; 
+      select * from part;
+      counter int:=0;
       rows part%rowtype; 
 begin 
 open curr; 
