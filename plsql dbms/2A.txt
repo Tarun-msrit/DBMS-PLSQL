@@ -1,0 +1,27 @@
+create table emp( 
+name char(10), 
+E_id number(5) not null primary key, 
+sal number(10), 
+dep number(3))
+;
+
+insert into emp values('seetha',100,25000,'10');
+
+insert into emp values('geetha',101,2000,'11');
+
+insert into emp values('ramesh',102,2550,'12');
+
+insert into emp values('raj',103,250000,'13');
+
+insert into emp values('guru',104,5400,'14');
+
+select * from emp;
+
+Begin 
+update emp 
+set sal=(1.15*sal) where dep=10; 
+dbms_output.put_line('number of rows updated are '||sql%rowcount); 
+end; 
+/
+select * from emp
+;

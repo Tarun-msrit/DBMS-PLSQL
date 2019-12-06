@@ -1,0 +1,80 @@
+
+
+create table branch( 
+code varchar(5) not null primary key, 
+name char(10), 
+asset number(10));
+
+insert into branch values('b1','msr',10000);
+
+insert into branch values('b2','rnr',20000);
+
+insert into branch values('b3','smr',15000);
+
+insert into branch values('b4','skr',25000);
+
+
+create table customer( 
+ssn number(5) not null primary key, 
+name char(10), 
+place char(10));
+
+insert into customer values(1,'Ram','bng');
+
+insert into customer values(2,'Asha','mng');
+
+insert into customer values(3,'Usha','mys');
+
+insert into customer values(4,'Sri','del');
+
+create table account( 
+accno varchar(5) not null primary key, 
+ssn number(5) references customer(ssn), 
+code varchar(5) references branch(code), 
+balance number(15));
+
+insert into account values('a1',1,'b1',10000);
+
+insert into account values('a2',1,'b1',20000);
+
+insert into account values('a3',2,'b2',10000);
+
+insert into account values('a4',3,'b2',10000);
+
+insert into account values('a5',3,'b2',10000);
+
+insert into account values('a6',3,'b2',10000);
+
+insert into account values('a7',4,'b2',20000);
+
+select * from branch;
+
+select * from account;
+
+select * from customer;
+
+
+begin 
+for rec in (select * from customer) 
+loop 
+dbms_output.put_line('name'||' '||rec.name||'ssn is'||' '||rec.ssn||'from place: '||rec.place); 
+end loop; 
+end; 
+/
+
+begin 
+for rec in (select * from branch) 
+loop 
+dbms_output.put_line('Code'||' '||rec.code||' '||'Name is'||' '||rec.name||' '|| 'Assets is:'||' '||rec.asset); 
+end loop; 
+end; 
+/
+
+begin 
+for rec in (select * from account) 
+loop 
+dbms_output.put_line('Account number is:'||' '||rec.accno||' ssn is'||' '||rec.ssn||' '||'Code'||' '||rec.code||' Balance :'||rec.balance); 
+end loop; 
+end; 
+/
+

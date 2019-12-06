@@ -1,0 +1,38 @@
+create table part( 
+pno number(3), 
+pname char(20), 
+colour char(20), 
+primary key(pno))
+;
+
+create table part1( 
+pno number(3), 
+pname char(20), 
+colour char(20), 
+primary key(pno))
+;
+
+insert into part values(10,'nuts','black');
+
+insert into part values(20,'bolts','grey');
+
+insert into part values(30,'screw','green');
+
+declare  
+      cursor curr is 
+      counter int; 
+      rows part%rowtype; 
+begin 
+open curr; 
+loop 
+     fetch curr into rows; 
+     exit when curr%notfound; 
+     insert into part1 values(rows.pno,rows.pname,rows.colour); 
+end loop; 
+counter := curr%rowcount; 
+close curr; 
+dbms_output.put_line('all '||counter||' rows are copied to table part1'); 
+end; 
+/
+
+select * from part1;
