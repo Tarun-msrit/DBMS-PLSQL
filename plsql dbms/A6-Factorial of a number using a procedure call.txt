@@ -1,6 +1,6 @@
 declare 
-    t number(10); 
-    fact1 number(10); 
+    t number; 
+    fact1 number; 
 -- in represents the value that will be passed from outside  
 -- out represents the parameter that will be used to return a value outside of the procedure. 
 procedure name(n in number,fact out number) is 
@@ -17,3 +17,4 @@ t:=4;
 name(t,fact1); 
 dbms_output.put_line('factorial is ' || fact1); 
 end; 
+/
