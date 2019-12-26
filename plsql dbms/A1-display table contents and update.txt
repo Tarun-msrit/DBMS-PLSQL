@@ -78,3 +78,10 @@ end loop;
 end; 
 /
 
+begin 
+update account  
+set balance=balance+(balance*0.1) 
+where ssn=1; 
+commit; 
+end;
+/
