@@ -1,0 +1,29 @@
+CREATE TABLE EMPLOYEE_DETAIL (
+SSN NUMBER(3) PRIMARY KEY,
+NAME VARCHAR(20),
+SALARY NUMBER(6),
+DEPTNO NUMBER(3) );
+
+CREATE OR REPLACE  TRIGGER tri_employee
+BEFORE insert or update
+ON EMPLOYEE_DETAIL
+FOR EACH ROW
+DECLARE
+rec varchar2(10) ;
+BEGIN
+SELECT to_char(sysdate,'Dy') INTO rec FROM dual;
+IF rec = 'Thu' OR rec='Wed' THEN
+dbms_output.put_line(rec);
+raise_application_error(-20343, 'NOT ALLOWED TO ENTER');
+END IF ;
+END ;
+/
+
+insert into employee_detail values(123,'rajesh',15000,2);
+
+
+OUTPUT:
+
+Wed
+ORA-20343: NOT ALLOWED TO ENTER ORA-06512: at "SQL_KFVGTGKXNSNETKSQICVFIRLHG.TRI_EMPLOYEE", line 7
+ORA-06512: at "SYS.DBMS_SQL", line 1721
